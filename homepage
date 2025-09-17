@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <!-- http://getbootstrap.com/docs/5.3/ -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <link href="/static/styles.css" rel="stylesheet">
+        <title>Roll For Golf</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-md navbar-dark">
+            <div class="container-fluid">
+                <h1>Roll For Golf</h1>
+            </div>
+        </nav>
+
+        <main class="background container py-5 text-center">
+            <div class="cardback">
+        <!-- <img class="navlogo" src="/static/initials_logo_white.png" height="59" width="78"> -->
+        <h3>Clubs</h3>
+        <input type="text" class="club" id="club0" value="Driver">
+        <input type="text" class="club" id="club1" value="3 wood">
+        <input type="text" class="club" id="club2" value="5 wood">
+        <input type="text" class="club" id="club3" value="4 iron">
+        <input type="text" class="club" id="club4" value="5 iron">
+        <input type="text" class="club" id="club5" value="6 iron">
+        <input type="text" class="club" id="club6" value="7 iron">
+        <input type="text" class="club" id="club7" value="8 iron">
+        <input type="text" class="club" id="club8" value="9 iron">
+        <input type="text" class="club" id="club9" value="Pitching wedge">
+        <input type="text" class="club" id="club10" value="Gap wedge">
+        <input type="text" class="club" id="club11" value="Sand wedge">
+        <input type="text" class="club" id="club12" value="Lob wedge">
+        <input type="text" class="club" id="club13" value="Putter">
+        <p id='empty'>Clear Bag</p>
+    </div>
+    <div class="gamebuttons">
+        <button id="gamebutton" class="btn start">Random Club</button>
+        <!--
+        <form action="/game" method="get">
+            <button class="btn btn-dark start gamebutton">Random Club</button>
+        </form>
+        -->
+    </div>
+        </main>
+
+        <script>
+        //let clubs = [];
+
+        //let bagLength = clubs.length;
+
+        //let p = document.createElement('p');
+
+        //const inputField = document.getElementById('club');
+
+        document.getElementById('empty').addEventListener('click', function() {
+            //alert('clicked');
+            for (let x = 0; x < 14; x++) {
+                document.getElementsByClassName('club')[x].value = '';
+            }
+        });
+
+        document.getElementById('gamebutton').addEventListener('click', function() {
+            //alert('clicked')
+            //alert(Math.floor(Math.random() * 13))
+            for (let x = 0; x < 14; x++) {
+                document.getElementsByClassName('club')[x].style.backgroundColor = '#fefae0';
+            }
+            highlight();
+        });
+
+        function highlight() {
+            let id = null;
+            let choice = Math.floor(Math.random() * 14);
+            let current = 0;
+            let highlighted = document.getElementsByClassName('club')
+            let a = 0;
+            let b = 0;
+
+            clearInterval(id);
+            id = setInterval(frame, 40);
+            function frame() {
+                if (b < 2) {
+                    if (a < 14) {
+                        if (a > 0) {
+                            highlighted[(a - 1)].style.backgroundColor = '#fefae0';
+                        }
+                        highlighted[a].style.backgroundColor = '#a1cca5';
+                        a++;
+                        //alert(a);
+                    }
+                    else {
+                        highlighted[13].style.backgroundColor = '#fefae0';
+                        b++;
+                        a = 0;
+                    };
+                }
+                if (b >= 2) {
+                    if (current <= choice) {
+                        if (current > 0) {
+                            highlighted[(current - 1)].style.backgroundColor = '#fefae0';
+                        }
+                        highlighted[current].style.backgroundColor = '#a1cca5';
+                        current++;
+                        //alert(choice)
+                        //highlighted[current - 1].style.backgroundColor = 'white';
+                    }
+                }
+            }
+        };
+
+        //document.getElementById('add').addEventListener('click', function() {
+        //    document.getElementById('currentClubs').append(club.value, p)
+        //    clubs.push(club.value)
+        //    inputField.value = '';
+        //});
+    </script>
+    </body>
+</html>
